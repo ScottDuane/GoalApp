@@ -1,0 +1,19 @@
+<% if logged_in? %>
+<h1>Welcome, <%= current_user.username %></h1>
+<%= button_to "Log Out", session_url, method: :delete %>
+<% end %>
+
+<h1>Goals</h1>
+<ul>
+  <% @goals.each do |goal| %>
+    <li>
+      <%= goal.description %>
+      <%= button_to "Edit", edit_goal_url(goal), method: :get %>
+      <%= button_to "Delete", goal_url(goal), method: :delete %>
+      <% goal.complete ? completeness = "Complete" : completeness = "In Progress" %>
+      <%= completeness %>
+    </li>
+  <% end %>
+</ul>
+
+<%= button_to "New Goal", new_goal_url, method: :get %>

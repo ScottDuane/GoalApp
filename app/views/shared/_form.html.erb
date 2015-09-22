@@ -1,0 +1,12 @@
+<% logging_in ? url = session_url : url = users_url %>
+<% logging_in ? msg = "Log In" : msg = "Sign Up" %>
+
+<form action="<%= url %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <label for="username">Username</label>
+  <input type="text" name="user[username]" id="username">
+  <label for="password">Password</label>
+  <input type="password" name="user[password]" id="password">
+
+  <input type="submit" value="<%= msg %>">
+</form>

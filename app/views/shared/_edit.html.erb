@@ -1,0 +1,22 @@
+<% @goal.persisted? ? action = "Edit" : action = "Create New" %>
+<% @goal.persisted? ? url = goal_url(@goal) : url = goals_url %>
+<% @goal.persisted? ? method = "patch" : method = "post" %>
+<% @goal.persisted? ? value = "Update Goal" : value = "Create Goal" %>
+
+<h1><%= action %> Goal</h1>
+  <form action="<%= url %>" method="post">
+    <input type="hidden" name="_method" value="<%= method %>">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <label for="description">Description</label>
+    <input type="description" name="goal[description]" id="description" value="<%= @goal.description %>">
+    <label for="completeness">Complete or In Progress:</label>
+    <select name="goal[complete]" id="completeness">
+      <option value="true" <%= "selected" if @goal.complete %>>
+        Complete
+      </option>
+      <option value="false" <%= "selected" unless @goal.complete %>>
+        In Progress
+      </option>
+    </select>
+    <input type="submit" value="<%= value %>">
+  </form>
